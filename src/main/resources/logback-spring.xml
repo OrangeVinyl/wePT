@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
 
+<configuration debug="true">
     <property name="CONSOLE_PATTERN" value="%boldMagenta(%d{MM-dd HH:mm:ss}) [%boldYellow(%-5level)] %cyan(%logger{5}.%M) - %msg %n"/>
     <property name="CONSOLE_PATTERN2" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight([%-3level]) %logger{5} - %msg %n"/>
 
+    // logback-spring.xml
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
     <!-- Appenders -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -16,12 +18,17 @@
             <pattern>${CONSOLE_PATTERN2}</pattern>
         </encoder>
     </appender>
+    <appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d %5p %m%n</Pattern>
+        </encoder>
+    </appender>
 
     <!-- Logger -->
     <logger name="jdbc" level="OFF" appender-ref="STDOUT" />
     <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="STDOUT" />
     <logger name="jdbc.sqltiming" level="OFF" appender-ref="STDOUT" />
-    <logger name="jdbc.resultsettable" level="INFO" appender-ref="STDOUT" />
+    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
     <logger name="org.hibernate.SQL" level="DEBUG" appender-ref="STDOUT"/>
     <logger name="org.encore.apartment.community" level="DEBUG" appender-ref="STDOUT" />
 

@@ -39,7 +39,7 @@ public class MaintenanceFee {
     private PaymentDate paymentDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_idx")
     private User user;
 
     @NotNull

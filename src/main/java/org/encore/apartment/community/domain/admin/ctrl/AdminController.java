@@ -1,28 +1,29 @@
 package org.encore.apartment.community.domain.admin.ctrl;
 
-import jakarta.annotation.Resource;
-import lombok.RequiredArgsConstructor;
-import org.encore.apartment.community.domain.admin.data.dto.AdminNumberRequestDTO;
 import org.encore.apartment.community.domain.admin.service.AdminServiceImpl;
-import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final AdminServiceImpl service;
+	private final AdminServiceImpl service;
 
-    @GetMapping("/contact-number")
-    public ResponseEntity<String> getAdminContactNumber(@RequestBody AdminNumberRequestDTO requestDTO){
-        return new ResponseEntity<>(service.getAdminContactNumber(requestDTO), HttpStatus.OK);
-    }
+	@Transactional
+	@GetMapping("/AdminContactNumber")
+	public ResponseEntity<String> findAdminContactNumberByUserId(String userId) {
+		System.out.println("Admin Controller find");
+		String adminContactNumber = service.findAdminContactNumberByUserId(userId);
+		System.out.println("admin contact number = " + adminContactNumber);
+		return new ResponseEntity<>(adminContactNumber, HttpStatus.OK);
+	}
 
 }

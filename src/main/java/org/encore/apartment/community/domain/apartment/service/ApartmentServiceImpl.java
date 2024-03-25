@@ -29,7 +29,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public Optional<ResponseApartmentDto> findApartmentInfo(Integer id) {
+    public Optional<ResponseApartmentDto> findApartmentInfo(Long id) {
         Optional<Apartment> apt = apartmentRepository.findById(id);
         log.info("findApartmentInfo = {}", apt);
 
@@ -46,14 +46,14 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     @Override
     @Transactional
-    public void updateApartmentInfoById(Integer id, UpdateApartmentDto params) {
+    public void updateApartmentInfoById(Long id, UpdateApartmentDto params) {
         Apartment apartment = apartmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 아파트 정보가 없습니다."));
         apartment.update(apartment.getApartmentName(), apartment.getApartmentAddress(), apartment.getApartmentTotalHousehold());
         log.info("updateApartmentInfo = {}", params);
     }
 
     @Override
-    public void deleteApartmentInfo(Integer id) {
+    public void deleteApartmentInfo(Long id) {
         apartmentRepository.deleteById(id);
         log.info("deleteApartmentInfo = {}", id);
     }

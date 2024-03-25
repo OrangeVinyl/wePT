@@ -1,19 +1,15 @@
 package org.encore.apartment.community.domain.admin.data.repository;
 
-import org.encore.apartment.community.domain.admin.data.dto.AdminNumberRequestDTO;
 import org.encore.apartment.community.domain.admin.data.entity.Admin;
-import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, String> {
+public interface AdminRepository extends JpaRepository<Admin, Long> {
 
-    @Query("SELECT A.adminContactNumber FROM Admin A WHERE A.apartmentId = :apartmentId")
-    String getAdminContactNumber(@Param("apartmentId") String apartmentId);
-
+	//기능 1: 사용자 거주 아파트의 관리실 전화번호 조회
+	@Query("SELECT adminContactNumber FROM Admin WHERE apartment=:apartmentId")
+	String findAdminContactNumberByApartmentId(@Param("apartmentId") Integer apartmentId);
 }

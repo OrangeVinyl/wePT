@@ -8,13 +8,13 @@ import org.encore.apartment.community.domain.apartment.data.dto.ResponseApartmen
 import org.encore.apartment.community.domain.apartment.data.dto.UpdateApartmentDto;
 
 public interface ApartmentService {
-    public void insertApartmentInfo(RequestApartmentDto params);
+	public void insertApartmentInfo(RequestApartmentDto params);
 
-    public Optional<ResponseApartmentDto> findApartmentInfo(Integer id);
+	public Optional<ResponseApartmentDto> findApartmentInfo(Long id);
 
-    public List<ResponseApartmentDto> findApartmentInfoList();
+	public List<ResponseApartmentDto> findApartmentInfoList();
 
-    public void updateApartmentInfoById(Integer id, UpdateApartmentDto params);
+	public void updateApartmentInfoById(Long id, UpdateApartmentDto params);
 
-    public void deleteApartmentInfo(Integer id);
+	public void deleteApartmentInfo(Long id);
 }

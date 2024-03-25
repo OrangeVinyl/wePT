@@ -25,46 +25,47 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/apartment")
 public class ApartmentController {
 
-    @Resource(name = "apartment")
-    private ApartmentService service;
+	@Resource(name = "apartment")
+	private ApartmentService service;
 
-    @PostMapping("/insert")
-    public ResponseEntity<Void> insertApartmentInfo(@RequestBody RequestApartmentDto params) {
-        service.insertApartmentInfo(params);
-        log.info("ApartmentController insertApartmentInfo = {}", params);
+	@PostMapping("/insert")
+	public ResponseEntity<Void> insertApartmentInfo(@RequestBody RequestApartmentDto params) {
+		service.insertApartmentInfo(params);
+		log.info("ApartmentController insertApartmentInfo = {}", params);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Optional<ResponseApartmentDto>> findApartmentInfo(@PathVariable Integer id) {
-        Optional<ResponseApartmentDto> dto = service.findApartmentInfo(id);
-        log.info("ApartmentController findApartmentInfo = {}", dto);
+	@GetMapping("/find/{id}")
+	public ResponseEntity<Optional<ResponseApartmentDto>> findApartmentInfo(@PathVariable Long id) {
+		Optional<ResponseApartmentDto> dto = service.findApartmentInfo(id);
+		log.info("ApartmentController findApartmentInfo = {}", dto);
 
-        return new ResponseEntity<Optional<ResponseApartmentDto>>(dto, HttpStatus.OK);
-    }
+		return new ResponseEntity<Optional<ResponseApartmentDto>>(dto, HttpStatus.OK);
+	}
 
-    @GetMapping("/list")
-    public ResponseEntity<List<ResponseApartmentDto>> findApartmentInfoList() {
-        List<ResponseApartmentDto> dto = service.findApartmentInfoList();
-        log.info("ApartmentController findApartmentInfoList = {}", dto);
+	@GetMapping("/list")
+	public ResponseEntity<List<ResponseApartmentDto>> findApartmentInfoList() {
+		List<ResponseApartmentDto> dto = service.findApartmentInfoList();
+		log.info("ApartmentController findApartmentInfoList = {}", dto);
 
-        return new ResponseEntity<List<ResponseApartmentDto>>(dto, HttpStatus.OK);
-    }
+		return new ResponseEntity<List<ResponseApartmentDto>>(dto, HttpStatus.OK);
+	}
 
-    @PostMapping("/update/{id}")
-    public ResponseEntity<Void> updateApartmentInfo(@PathVariable("id") Integer id, @RequestBody UpdateApartmentDto params) {
-        log.info("ApartmentController updateApartmentInfo = {}", params);
-        service.updateApartmentInfoById(id, params);
+	@PostMapping("/update/{id}")
+	public ResponseEntity<Void> updateApartmentInfo(@PathVariable("id") Long id,
+		@RequestBody UpdateApartmentDto params) {
+		log.info("ApartmentController updateApartmentInfo = {}", params);
+		service.updateApartmentInfoById(id, params);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteApartmentInfo(@PathVariable Integer id) {
-        log.info("ApartmentController deleteApartmentInfo = {}", id);
-        service.deleteApartmentInfo(id);
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Void> deleteApartmentInfo(@PathVariable Long id) {
+		log.info("ApartmentController deleteApartmentInfo = {}", id);
+		service.deleteApartmentInfo(id);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }

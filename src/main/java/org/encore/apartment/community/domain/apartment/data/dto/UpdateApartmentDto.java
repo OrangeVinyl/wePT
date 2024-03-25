@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UpdateApartmentDto {
-    @NotNull
-    private Integer apartmentId;
+	@NotNull
+	private Long apartmentId;
 
-    @NotBlank
-    private String apartmentName;
+	@NotBlank
+	private String apartmentName;
 
-    @NotBlank
-    private String apartmentAddress;
-    private Integer apartmentTotalHousehold;
+	@NotBlank
+	private String apartmentAddress;
+	private Integer apartmentTotalHousehold;
 }

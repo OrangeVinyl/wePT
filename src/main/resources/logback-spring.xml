@@ -25,12 +25,21 @@
     </appender>
 
     <!-- Logger -->
+<!--<<<<<<< HEAD-->
+<!--    <logger name="jdbc" level="OFF"  />-->
+<!--    <logger name="jdbc.sqlonly" level="DEBUG"  />-->
+<!--    <logger name="jdbc.sqltiming" level="OFF" />-->
+<!--    <logger name="jdbc.resultsettable" level="INFO"  />-->
+<!--    <logger name="org.encore.apartment.community" level="DEBUG" />-->
+<!--=======-->
     <logger name="jdbc" level="OFF" appender-ref="STDOUT" />
     <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="STDOUT" />
     <logger name="jdbc.sqltiming" level="OFF" appender-ref="STDOUT" />
     <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
     <logger name="org.hibernate.SQL" level="DEBUG" appender-ref="STDOUT"/>
     <logger name="org.encore.apartment.community" level="DEBUG" appender-ref="STDOUT" />
+<!--&gt;>>>>>> 45d97ed (faciliy dto&entity 생성)-->
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
 
     <!-- Root Logger -->
     <root level="INFO">

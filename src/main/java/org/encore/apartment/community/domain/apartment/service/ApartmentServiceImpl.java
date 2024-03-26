@@ -19,42 +19,42 @@ import lombok.extern.slf4j.Slf4j;
 @Service("apartment")
 @RequiredArgsConstructor
 public class ApartmentServiceImpl implements ApartmentService {
-    private final ApartmentRepository apartmentRepository;
+	private final ApartmentRepository apartmentRepository;
 
-    @Override
-    public void insertApartmentInfo(RequestApartmentDto params) {
-        Apartment apt = RequestApartmentDto.toEntity(params);
-        apartmentRepository.save(apt);
-        log.info("insertApartmentInfo = {}", apt);
-    }
+	@Override
+	public void insertApartmentInfo(RequestApartmentDto params) {
+		Apartment apt = RequestApartmentDto.toEntity(params);
+		apartmentRepository.save(apt);
+		log.info("insertApartmentInfo = {}", apt);
+	}
 
-    @Override
-    public Optional<ResponseApartmentDto> findApartmentInfo(Long id) {
-        Optional<Apartment> apt = apartmentRepository.findById(id);
-        log.info("findApartmentInfo = {}", apt);
+	@Override
+	public Optional<ResponseApartmentDto> findApartmentInfo(Long id) {
+		Optional<Apartment> apt = apartmentRepository.findById(id);
+		log.info("findApartmentInfo = {}", apt);
 
-        return apt.map(ResponseApartmentDto::new);
-    }
+		return apt.map(ResponseApartmentDto::new);
+	}
 
-    @Override
-    public List<ResponseApartmentDto> findApartmentInfoList() {
-        List<Apartment> aptList = apartmentRepository.findAll();
-        log.info("findApartmentInfoList = {}", aptList);
+	@Override
+	public List<ResponseApartmentDto> findApartmentInfoList() {
+		List<Apartment> aptList = apartmentRepository.findAll();
+		log.info("findApartmentInfoList = {}", aptList);
 
-        return aptList.stream().map(ResponseApartmentDto::new).collect(Collectors.toList());
-    }
+		return aptList.stream().map(ResponseApartmentDto::new).collect(Collectors.toList());
+	}
 
-    @Override
-    @Transactional
-    public void updateApartmentInfoById(Long id, UpdateApartmentDto params) {
-        Apartment apartment = apartmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 아파트 정보가 없습니다."));
-        apartment.update(apartment.getApartmentName(), apartment.getApartmentAddress(), apartment.getApartmentTotalHousehold());
-        log.info("updateApartmentInfo = {}", params);
-    }
+	@Override
+	@Transactional
+	public void updateApartmentInfoById(Long id, UpdateApartmentDto params) {
+		Apartment apartment = apartmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 아파트 정보가 없습니다."));
+		apartment.update(apartment.getApartmentName(), apartment.getApartmentAddress(), apartment.getApartmentTotalHousehold());
+		log.info("updateApartmentInfo = {}", params);
+	}
 
-    @Override
-    public void deleteApartmentInfo(Long id) {
-        apartmentRepository.deleteById(id);
-        log.info("deleteApartmentInfo = {}", id);
-    }
+	@Override
+	public void deleteApartmentInfo(Long id) {
+		apartmentRepository.deleteById(id);
+		log.info("deleteApartmentInfo = {}", id);
+	}
 }

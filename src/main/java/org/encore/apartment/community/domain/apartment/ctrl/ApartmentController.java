@@ -53,8 +53,7 @@ public class ApartmentController {
 	}
 
 	@PostMapping("/update/{id}")
-	public ResponseEntity<Void> updateApartmentInfo(@PathVariable("id") Long id,
-		@RequestBody UpdateApartmentDto params) {
+	public ResponseEntity<Void> updateApartmentInfo(@PathVariable("id") Long id, @RequestBody UpdateApartmentDto params) {
 		log.info("ApartmentController updateApartmentInfo = {}", params);
 		service.updateApartmentInfoById(id, params);
 

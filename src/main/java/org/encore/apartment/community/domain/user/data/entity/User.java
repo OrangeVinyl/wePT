@@ -2,79 +2,89 @@ package org.encore.apartment.community.domain.user.data.entity;
 
 import java.time.LocalDateTime;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+=======
+import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
+import org.encore.apartment.community.domain.user.data.dto.user.UpdateRequestUserDto;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+>>>>>>> 6ab98d88851c995e8f0237599d1b9710e1951480
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
+import lombok.Setter;
 
 @Getter
 @Entity
-@Table(name = "user_tbl")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
 	@Id
-	@Column(name = "user_idx")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_idx")
 	private Long userIdx;
 
-	@ManyToOne
-	@JoinColumn(name = "apartment_id")
-	private Apartment apartment;
-
-	@NotNull
-	@Column(name = "user_id")
+	@Column(name = "user_id", unique = true, nullable = false)
 	private String userId;
 
-	@NotNull
-	@Column(name = "user_password")
+	@Column(name = "user_password", nullable = false)
 	private String userPassword;
 
-	@NotNull
-	@Column(name = "user_nickname")
+	@Column(name = "user_nickname", nullable = false)
 	private String userNickname;
 
-	@NotNull
-	@Email
 	@Column(name = "user_email")
 	private String userEmail;
 
-	@NotNull
-	@Column(name =  "user_mobile")
-	@Pattern(regexp = "^010-\\d{4}-\\d{4}$", message = "전화번호는 010-XXXX-XXXX 형식이어야 합니다.")
+	@Column(name =  "user_mobile", unique = true, nullable = false)
 	private String userMobile;
 
-	@NotNull
-	@Column(name = "user_building_number")
+	@Column(name = "user_building_number", nullable = false)
 	private Integer userBuildingNumber;
 
-	@NotNull
-	@Column(name = "user_house_number")
+	@Column(name = "user_house_number", nullable = false)
 	private Integer userHouseNumber;
 
-	@NotNull
-	@Column(name = "user_head_household_yn", columnDefinition = "boolean default true")
+	@Column(name = "user_head_household_yn", nullable = false, columnDefinition = "boolean default true")
+	@ColumnDefault("true")
 	private Boolean userHeadHouseHoldYn;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
+	@CreationTimestamp
 	private LocalDateTime createdAt;
 
 	@Column(name = "updated_at")
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
 	@Column(name = "delete_yn", columnDefinition = "boolean default false")
 	private Boolean deleteYn;
 
-	@Builder
+	@Setter
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "apartment_id", nullable = false)
+	private Apartment apartment;
 
-	public User(Long userIdx, Apartment apartment, String userId, String userPassword, String userNickname, String userEmail, String userMobile, Integer userBuildingNumber, Integer userHouseNumber, Boolean userHeadHouseHoldYn, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean deleteYn) {
-		this.userIdx = userIdx;
-		this.apartment = apartment;
+	@Builder
+	public User(
+		String userId, String userPassword, String userNickname, String userEmail, String userMobile,
+		Integer userBuildingNumber, Integer userHouseNumber, Boolean userHeadHouseHoldYn, LocalDateTime createdAt,
+		LocalDateTime updatedAt, Boolean deleteYn) {
 		this.userId = userId;
 		this.userPassword = userPassword;
 		this.userNickname = userNickname;
@@ -86,5 +96,18 @@ public class User {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.deleteYn = deleteYn;
+	}
+
+	public void update(UpdateRequestUserDto params) {
+		this.userNickname = params.getUserNickname();
+		this.userEmail = params.getUserEmail();
+		this.userMobile = params.getUserMobile();
+
+		this.updatedAt = LocalDateTime.now();
+	}
+
+	public void updateDeleteYn() {
+		this.deleteYn = true;
+		this.updatedAt = LocalDateTime.now();
 	}
 }

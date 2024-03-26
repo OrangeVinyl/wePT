@@ -22,6 +22,7 @@ import lombok.Getter;
 @IdClass(MaintenanceFeeId.class)
 @Table(name = "maintenanceFee_tbl")
 public class MaintenanceFee implements Serializable {
+
 	/*
 	복합키(include 외래키) : PK는 paymentDate from this tbl & userIdx from user_tbl
 	표현법 : by using @embeddable
@@ -76,6 +77,9 @@ public class MaintenanceFee implements Serializable {
 	@Column(name = "cleaning_fee")
 	private Integer cleaningFee;
 
+	@Column(name = "membership_fee")
+	private Integer membershipFee;
+
 	public MaintenanceFee() {
 	}
 
@@ -83,7 +87,7 @@ public class MaintenanceFee implements Serializable {
 	public MaintenanceFee(Date paymentDate, User user, Integer generalMaintenanceFee, Integer securityServiceFee,
 		Integer disinfectionFee, Integer elevatorMaintenanceFee, Integer intelligentMaintenanceFee,
 		Integer heatingMaintenanceFee, Integer hotWaterSupplyFee, Integer repairFee, Integer entrustedManagementFee,
-		Integer cleaningFee) {
+		Integer cleaningFee, Integer membershipFee) {
 		this.paymentDate = paymentDate;
 		this.user = user;
 		this.generalMaintenanceFee = generalMaintenanceFee;
@@ -96,5 +100,6 @@ public class MaintenanceFee implements Serializable {
 		this.repairFee = repairFee;
 		this.entrustedManagementFee = entrustedManagementFee;
 		this.cleaningFee = cleaningFee;
+		this.membershipFee = membershipFee;
 	}
 }

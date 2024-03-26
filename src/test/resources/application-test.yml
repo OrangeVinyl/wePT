@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate.on-profile: test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;NON_KEYWORDS=user
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        globally_quoted_identifiers: true
+    generate-ddl: true
+    show-sql: true
+    database: h2
+
+  h2:
+    console:
+      enabled: true
+
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace

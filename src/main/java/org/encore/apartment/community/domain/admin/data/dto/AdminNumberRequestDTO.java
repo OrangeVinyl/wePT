@@ -6,8 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminNumberRequestDTO {
-
-    private String userId;
-    private String apartmentId;
-
+	private String userId;
+	private String apartmentId;
 }

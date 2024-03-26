@@ -17,9 +17,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String findAdminContactNumberByUserId(String userId) {
-		//System.out.println("admin service find");
 		Integer apartmentId = userRepository.findApartmentIdByUserId(userId);
-		//System.out.println("admin service apt ID = " + apartmentId);
 		return adminRepository.findAdminContactNumberByApartmentId(apartmentId);
 	}
 }

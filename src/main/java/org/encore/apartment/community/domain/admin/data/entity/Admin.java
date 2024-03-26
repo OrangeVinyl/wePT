@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -25,9 +26,9 @@ public class Admin {
 	@Column(name = "admin_id")
 	private Long adminId;
 
-	@NotNull
+	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "apartment_id")
+	@JoinColumn(name = "apartment_id", nullable = false)
 	private Apartment apartment;
 
 	@NotNull
@@ -39,11 +40,9 @@ public class Admin {
 	private String adminContactNumber;
 
 	public Admin() {
-
 	}
 
 	@Builder
-
 	public Admin(Long adminId, Apartment apartment, String adminPassword, String adminContactNumber) {
 		this.adminId = adminId;
 		this.apartment = apartment;

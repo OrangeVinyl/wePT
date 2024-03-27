@@ -2,12 +2,6 @@ package org.encore.apartment.community.domain.user.data.entity;
 
 import java.time.LocalDateTime;
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-=======
 import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
 import org.encore.apartment.community.domain.user.data.dto.user.UpdateRequestUserDto;
 import org.hibernate.annotations.ColumnDefault;
@@ -22,7 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
->>>>>>> 6ab98d88851c995e8f0237599d1b9710e1951480
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -51,7 +44,7 @@ public class User {
 	@Column(name = "user_email")
 	private String userEmail;
 
-	@Column(name =  "user_mobile", unique = true, nullable = false)
+	@Column(name = "user_mobile", unique = true, nullable = false)
 	private String userMobile;
 
 	@Column(name = "user_building_number", nullable = false)

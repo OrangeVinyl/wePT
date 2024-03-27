@@ -43,12 +43,12 @@ VALUES
 --     facility_fee                       int          not null,
 --     facility_id                        int          not null
 --     facility_operating_time            int          not null,
---     facility_reservation_availble_time int          null,
+--     facility_reservation_available_time int          null,
 --     facility_membership_yn             varchar(255) not null,
 --     facility_name                      varchar(255) not null
 --      수영장0, 헬스장0, 스크린골프장, 테니스장, 바베큐장, 영화관, 독서실0, 회의실
 INSERT INTO facility (facility_id, facility_name,
-                             facility_reservation_availble_time, facility_operating_time,
+                             facility_reservation_available_time, facility_operating_time,
                              facility_membership_yn, facility_fee)
 VALUES
     (1, '수영장', 24, 522, true, 100000),
@@ -60,7 +60,7 @@ VALUES
     (7, '영화관', 3, 724, false, 30000),
     (8, '회의실', 2, 724, false, 30000);
 
--- realtimefacility 기본 값
+-- realtime_facility 기본 값
 --     realtime_facility_current_users int not null,
 --     realtime_facility_id            int not null
 
@@ -70,9 +70,8 @@ VALUES
     (2, 0),
     (3, 0);
 
-=======
 -- User 테이블 더미데이터
-INSERT INTO User (user_id, user_password, user_nickname, user_email, user_mobile, user_building_number, user_house_number, user_head_household_yn, created_at, updated_at, delete_yn, apartment_id)
+INSERT INTO User (user_1id, user_password, user_nickname, user_email, user_mobile, user_building_number, user_house_number, user_head_household_yn, created_at, updated_at, delete_yn, apartment_id)
 VALUES
     ('john_doe', 'password123', 'JohnDoe', 'john@example.com', '010-1234-5678', 3, 201, true, CURRENT_TIMESTAMP, NULL, false, 1),
     ('jane_smith', 'password456', 'JaneSmith', 'jane@example.com', '010-2345-6789', 5, 202, true, CURRENT_TIMESTAMP, NULL, false, 2),

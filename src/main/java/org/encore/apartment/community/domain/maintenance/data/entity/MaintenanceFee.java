@@ -12,15 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Entity
 @IdClass(MaintenanceFeeId.class)
-@Table(name = "maintenanceFee_tbl")
 public class MaintenanceFee implements Serializable {
 
 	/*
@@ -37,44 +34,34 @@ public class MaintenanceFee implements Serializable {
 	@JoinColumn(name = "user_idx", referencedColumnName = "user_idx")
 	private User user;
 
-	@NotNull
-	@Column(name = "general_maintenance_fee")
+	@Column(name = "general_maintenance_fee", nullable = false)
 	private Integer generalMaintenanceFee;
 
-	@NotNull
-	@Column(name = "security_service_fee")
+	@Column(name = "security_service_fee", nullable = false)
 	private Integer securityServiceFee;
 
-	@NotNull
-	@Column(name = "disinfection_fee")
+	@Column(name = "disinfection_fee", nullable = false)
 	private Integer disinfectionFee;
 
-	@NotNull
-	@Column(name = "elevator_maintenance_fee")
+	@Column(name = "elevator_maintenance_fee", nullable = false)
 	private Integer elevatorMaintenanceFee;
 
-	@NotNull
-	@Column(name = "intelligent_maintenance_fee")
+	@Column(name = "intelligent_maintenance_fee", nullable = false)
 	private Integer intelligentMaintenanceFee;
 
-	@NotNull
-	@Column(name = "heating_maintenance_fee")
+	@Column(name = "heating_maintenance_fee", nullable = false)
 	private Integer heatingMaintenanceFee;
 
-	@NotNull
-	@Column(name = "hot_water_supply_fee")
+	@Column(name = "hot_water_supply_fee", nullable = false)
 	private Integer hotWaterSupplyFee;
 
-	@NotNull
-	@Column(name = "repair_fee")
+	@Column(name = "repair_fee", nullable = false)
 	private Integer repairFee;
 
-	@NotNull
-	@Column(name = "entrusted_management_fee")
+	@Column(name = "entrusted_management_fee", nullable = false)
 	private Integer entrustedManagementFee;
 
-	@NotNull
-	@Column(name = "cleaning_fee")
+	@Column(name = "cleaning_fee", nullable = false)
 	private Integer cleaningFee;
 
 	@Column(name = "membership_fee")

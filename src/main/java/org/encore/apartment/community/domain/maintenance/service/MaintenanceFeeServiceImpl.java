@@ -1,11 +1,11 @@
 package org.encore.apartment.community.domain.maintenance.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.encore.apartment.community.domain.maintenance.data.dto.ItemPercentage;
 import org.encore.apartment.community.domain.maintenance.data.dto.MaintenanceFeeDto;
+import org.encore.apartment.community.domain.maintenance.data.dto.ResponseMaintenanceFeeDto;
 import org.encore.apartment.community.domain.maintenance.data.entity.MaintenanceFee;
 import org.encore.apartment.community.domain.maintenance.data.repository.MaintenanceFeeRepository;
 import org.encore.apartment.community.domain.user.data.repository.UserRepository;
@@ -28,17 +28,29 @@ public class MaintenanceFeeServiceImpl implements MaintenanceFeeService {
 		this.userRepository = userRepository;
 	}
 
-	//기능 : 관리비 조회
 	@Override
-	public Integer findGeneralMaintenanceFeeByUserId(String userId) {
-		Long userIdx = userRepository.findUserIdxByUserId(userId);
-		return maintenanceFeeRepository.findGeneralMaintenanceFeeByUserIdx(userIdx);
+	public void save(ResponseMaintenanceFeeDto dto) {
+		maintenanceFeeRepository.save(dto.toEntity(dto));
+	}
+
+	//기능 : 관리비 조회(ok!)
+	//userid로 entity 찾, 그 entity로 총합 함수 메서드를 가져와서 총합 구하기
+	@Override
+	public Integer findMaintenanceFeeByUserId(String userId) {
+		Long userIdx = userRepository.findUserIdxByUserId(userId); // user -> findByUserIdx()
+		MaintenanceFee tmp = maintenanceFeeRepository.findMaintenanceFeeByUserIdx(userIdx);
+		Integer totalFee = (tmp.getGeneralMaintenanceFee() + tmp.getSecurityServiceFee() + tmp.getDisinfectionFee()
+			+ tmp.getElevatorMaintenanceFee() + tmp.getIntelligentMaintenanceFee() + tmp.getHeatingMaintenanceFee()
+			+ tmp.getHotWaterSupplyFee() + tmp.getRepairFee() + tmp.getEntrustedManagementFee() + tmp.getCleaningFee()
+			+ tmp.getMembershipFee());
+		return totalFee;
 	}
 
 	//기능 : 관리비 내역 별 비중 조회( 총 관리비 계산 + 관리비 내 각 항목의 비중 계산 + 계산된 값의 percentage화 )
 	@Override
-	public List<ItemPercentage> getItemPercentages(Date paymentDate) {
-		MaintenanceFee maintenanceFee = maintenanceFeeRepository.findByPaymentDate(paymentDate);
+	public List<ItemPercentage> getItemPercentages(String userId) {
+		Long userIdx = userRepository.findUserIdxByUserId(userId); // user -> findByUserIdx()
+		MaintenanceFee maintenanceFee = maintenanceFeeRepository.findMaintenanceFeeByUserIdx(userIdx);
 		List<ItemPercentage> itemPercentages = new ArrayList<>();
 
 		// 총 관리비 계산
@@ -101,8 +113,8 @@ public class MaintenanceFeeServiceImpl implements MaintenanceFeeService {
 			MaintenanceFee currentMonthFee = pastFees.get(0);
 			MaintenanceFee lastMonthFee = pastFees.get(1);
 
-			int currentMonthGeneralFee = currentMonthFee.getGeneralMaintenanceFee();
-			int lastMonthGeneralFee = lastMonthFee.getGeneralMaintenanceFee();
+			// int currentMonthGeneralFee = currentMonthFee.getGeneralMaintenanceFee();
+			// int lastMonthGeneralFee = lastMonthFee.getGeneralMaintenanceFee();
 
 			// 전월과 당월의 관리비
 			int totalCurrentMonthFee = calculateTotalFee(currentMonthFee);

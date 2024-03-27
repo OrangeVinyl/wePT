@@ -5,16 +5,17 @@ import java.util.Optional;
 
 import org.encore.apartment.community.domain.apartment.data.dto.RequestApartmentDto;
 import org.encore.apartment.community.domain.apartment.data.dto.ResponseApartmentDto;
-import org.encore.apartment.community.domain.apartment.data.dto.UpdateApartmentDto;
+import org.encore.apartment.community.domain.apartment.data.dto.UpdateRequestApartmentDto;
+import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
 
 public interface ApartmentService {
-	public void insertApartmentInfo(RequestApartmentDto params);
+	void insertApartmentInfo(RequestApartmentDto params);
 
-	public Optional<ResponseApartmentDto> findApartmentInfo(Long id);
+	Optional<ResponseApartmentDto> findApartmentInfo(Long id);
 
-	public List<ResponseApartmentDto> findApartmentInfoList();
+	List<ResponseApartmentDto> findApartmentInfoList();
 
-	public void updateApartmentInfoById(Long id, UpdateApartmentDto params);
+	ResponseApartmentDto updateApartmentInfoById(Long id, UpdateRequestApartmentDto params);
 
-	public void deleteApartmentInfo(Long id);
+	void deleteApartmentInfo(Long id);
 }

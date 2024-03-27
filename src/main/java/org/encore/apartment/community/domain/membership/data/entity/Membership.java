@@ -1,7 +1,8 @@
-package org.encore.apartment.community.domain.user.data.entity;
+package org.encore.apartment.community.domain.membership.data.entity;
 
 import java.time.LocalDateTime;
 
+import org.encore.apartment.community.domain.user.data.entity.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;

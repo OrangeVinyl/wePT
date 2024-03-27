@@ -1,15 +1,21 @@
 package org.encore.apartment.community.domain.user.data.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
-import org.encore.apartment.community.domain.user.data.dto.user.UpdateRequestUserDto;
+import org.encore.apartment.community.domain.user.common.UserType;
+import org.encore.apartment.community.domain.user.data.dto.UserUpdateRequestDto;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -68,6 +74,10 @@ public class User {
 	@Column(name = "delete_yn", columnDefinition = "boolean default false")
 	private Boolean deleteYn;
 
+	@Column(name = "user_type")
+	@Enumerated(EnumType.STRING)
+	private UserType userType;
+
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "apartment_id", nullable = false)
@@ -77,7 +87,7 @@ public class User {
 	public User(
 		String userId, String userPassword, String userNickname, String userEmail, String userMobile,
 		Integer userBuildingNumber, Integer userHouseNumber, Boolean userHeadHouseHoldYn, LocalDateTime createdAt,
-		LocalDateTime updatedAt, Boolean deleteYn) {
+		LocalDateTime updatedAt, Boolean deleteYn, UserType userType) {
 		this.userId = userId;
 		this.userPassword = userPassword;
 		this.userNickname = userNickname;
@@ -88,10 +98,11 @@ public class User {
 		this.userHeadHouseHoldYn = userHeadHouseHoldYn;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.userType = userType;
 		this.deleteYn = deleteYn;
 	}
 
-	public void update(UpdateRequestUserDto params) {
+	public void update(UserUpdateRequestDto params) {
 		this.userNickname = params.getUserNickname();
 		this.userEmail = params.getUserEmail();
 		this.userMobile = params.getUserMobile();

@@ -1,14 +1,14 @@
-package org.encore.apartment.community.domain.user.service.user;
+package org.encore.apartment.community.domain.user.service;
 
 import java.util.Optional;
 
-import org.encore.apartment.community.domain.apartment.data.repository.ApartmentRepository;
-import org.encore.apartment.community.domain.user.data.dto.user.RequestUserDto;
-import org.encore.apartment.community.domain.user.data.dto.user.ResponseUserDto;
-import org.encore.apartment.community.domain.user.data.dto.user.UpdateRequestUserDto;
+import org.encore.apartment.community.domain.apartment.repository.ApartmentRepository;
+import org.encore.apartment.community.domain.user.data.dto.UserRequestDto;
+import org.encore.apartment.community.domain.user.data.dto.UserResponseDto;
+import org.encore.apartment.community.domain.user.data.dto.UserUpdateRequestDto;
 import org.encore.apartment.community.domain.user.data.entity.User;
-import org.encore.apartment.community.domain.user.data.repository.UserRepository;
-import org.encore.apartment.community.domain.user.service.user.UserService;
+import org.encore.apartment.community.domain.user.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +24,12 @@ public class UserServiceImpl implements UserService {
 
 	private final ApartmentRepository apartmentRepository;
 
+	private final PasswordEncoder encoder;
+
 	@Override
 	@Transactional
-	public Long createUser(RequestUserDto params) {
-		User user = RequestUserDto.toEntity(params);
+	public Long createUser(UserRequestDto params) {
+		User user = UserRequestDto.toEntity(params, encoder);
 		apartmentRepository.findById(params.getApartmentId()).ifPresent(user::setApartment);
 		log.info("createUser = {}", user);
 
@@ -35,18 +37,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseUserDto findUserInfo(Long idx) {
-		Optional<User> user = userRepository.findById(idx);
-		ResponseUserDto responseUserDto = new ResponseUserDto(user.get());
-		responseUserDto.setApartmentInfo(user.get().getApartment());
+	public UserResponseDto findUserInfo(String userId) {
+		Optional<User> user = userRepository.findByUserId(userId);
+		UserResponseDto userResponseDto = new UserResponseDto(user.get());
+		userResponseDto.setApartmentInfo(user.get().getApartment());
 		log.info("findUserInfo = {}", user);
 
-		return responseUserDto;
+		return userResponseDto;
 	}
 
 	@Override
-	public Long updateUserInfo(UpdateRequestUserDto params) {
-		Optional<User> user = userRepository.findById(params.getUserIdx());
+	public Long updateUserInfo(String userId, UserUpdateRequestDto params) {
+		Optional<User> user = userRepository.findByUserId(userId);
 		user.ifPresent(u -> u.update(params));
 		log.info("updateUserInfo = {}", user);
 		userRepository.save(user.get());

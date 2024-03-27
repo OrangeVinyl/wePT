@@ -1,8 +1,8 @@
-package org.encore.apartment.community.domain.user.data.repository;
+package org.encore.apartment.community.domain.membership.repository;
 
 import java.util.Optional;
 
-import org.encore.apartment.community.domain.user.data.entity.Membership;
+import org.encore.apartment.community.domain.membership.data.entity.Membership;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

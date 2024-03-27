@@ -1,4 +1,4 @@
-package org.encore.apartment.community.domain.user.data.dto.user;
+package org.encore.apartment.community.domain.user.data.dto;
 
 import org.encore.apartment.community.domain.apartment.data.entity.Apartment;
 import org.encore.apartment.community.domain.user.data.entity.User;
@@ -6,7 +6,7 @@ import org.encore.apartment.community.domain.user.data.entity.User;
 import lombok.Data;
 
 @Data
-public class ResponseUserDto {
+public class UserResponseDto {
 	private Long userIdx;
 	private String userId;
 	private String userNickname;
@@ -15,12 +15,13 @@ public class ResponseUserDto {
 	private Integer userBuildingNumber;
 	private Integer userHouseNumber;
 	private Boolean userHeadHouseHoldYn;
+	private String userType;
 
 	private Long apartmentId;
 	private String apartmentName;
 	private String apartmentAddress;
 
-	public ResponseUserDto(User user) {
+	public UserResponseDto(User user) {
 		this.userIdx = user.getUserIdx();
 		this.userId = user.getUserId();
 		this.userNickname = user.getUserNickname();
@@ -29,6 +30,7 @@ public class ResponseUserDto {
 		this.userBuildingNumber = user.getUserBuildingNumber();
 		this.userHouseNumber = user.getUserHouseNumber();
 		this.userHeadHouseHoldYn = user.getUserHeadHouseHoldYn();
+		this.userType = String.valueOf(user.getUserType());
 	}
 
 	public void setApartmentInfo(Apartment apartment) {

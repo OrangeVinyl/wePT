@@ -8,7 +8,7 @@ import org.encore.apartment.community.domain.maintenance.data.dto.MaintenanceFee
 import org.encore.apartment.community.domain.maintenance.data.dto.ResponseMaintenanceFeeDto;
 import org.encore.apartment.community.domain.maintenance.data.entity.MaintenanceFee;
 import org.encore.apartment.community.domain.maintenance.data.repository.MaintenanceFeeRepository;
-import org.encore.apartment.community.domain.user.data.repository.UserRepository;
+import org.encore.apartment.community.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

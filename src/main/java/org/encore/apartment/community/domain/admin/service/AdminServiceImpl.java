@@ -1,7 +1,7 @@
 package org.encore.apartment.community.domain.admin.service;
 
 import org.encore.apartment.community.domain.admin.data.repository.AdminRepository;
-import org.encore.apartment.community.domain.user.data.repository.UserRepository;
+import org.encore.apartment.community.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

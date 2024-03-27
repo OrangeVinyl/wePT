@@ -1,6 +1,5 @@
 package org.encore.apartment.community.global.handler;
 
-
 import java.util.NoSuchElementException;
 
 import org.encore.apartment.community.global.util.api.ApiResponse;

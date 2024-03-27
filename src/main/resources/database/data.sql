@@ -48,7 +48,7 @@ VALUES
 --     facility_name                      varchar(255) not null
 --      수영장0, 헬스장0, 스크린골프장, 테니스장, 바베큐장, 영화관, 독서실0, 회의실
 INSERT INTO facility (facility_id, facility_name,
-                             facility_reservation_availble_time, facility_operating_time,
+                             facility_reservation_available_time, facility_operating_time,
                              facility_membership_yn, facility_fee)
 VALUES
     (1, '수영장', 24, 522, true, 100000),

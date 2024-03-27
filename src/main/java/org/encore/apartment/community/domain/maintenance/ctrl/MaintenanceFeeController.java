@@ -6,6 +6,7 @@ import org.encore.apartment.community.domain.maintenance.data.dto.ItemPercentage
 import org.encore.apartment.community.domain.maintenance.data.dto.MaintenanceFeeDto;
 import org.encore.apartment.community.domain.maintenance.data.dto.ResponseMaintenanceFeeDto;
 import org.encore.apartment.community.domain.maintenance.service.MaintenanceFeeService;
+import org.encore.apartment.community.global.util.api.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/maintenanceFee")
+@RequestMapping("/maintenanceFee")
 public class MaintenanceFeeController {
 	private final MaintenanceFeeService maintenanceFeeService;
 
@@ -26,8 +27,10 @@ public class MaintenanceFeeController {
 	}
 
 	@PostMapping("/insert")
-	public void insertMaintainFee(@RequestBody ResponseMaintenanceFeeDto body) {
+	public ApiResponse<ResponseMaintenanceFeeDto> insertMaintainFee(@RequestBody ResponseMaintenanceFeeDto body) {
 		maintenanceFeeService.save(body);
+
+		return ApiResponse.createSuccess(body);
 	}
 
 	//관리비 조회

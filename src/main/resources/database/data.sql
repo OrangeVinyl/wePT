@@ -52,7 +52,7 @@ VALUES (4, '2024-03-22 02:25:49', '2024-03-24 02:25:49', 'string', 2),
 --     facility_name                      varchar(255) not null
 --      수영장0, 헬스장0, 스크린골프장, 테니스장, 바베큐장, 영화관, 독서실0, 회의실
 INSERT INTO facility (facility_id, facility_name,
-                             facility_reservation_availble_time, facility_operating_time,
+                             facility_reservation_available_time, facility_operating_time,
                              facility_membership_yn, facility_fee)
 VALUES
     (1, '수영장', 24, 522, true, 100000),
@@ -76,7 +76,7 @@ VALUES (1, 0),
 -- User 테이블 더미데이터
 INSERT INTO User (user_id, user_password, user_nickname, user_email, user_mobile, user_building_number,
                   user_house_number, user_head_household_yn, created_at, updated_at, delete_yn, apartment_id, user_type)
-VALUES ('john_doe', 'password123', 'JohnDoe', 'john@example.com', '010-1234-5678', 3, 201, true, CURRENT_TIMESTAMP,
+VALUES ('john_doeee', 'password123', 'JohnDoe', 'john@example.com', '010-1234-5678', 3, 201, true, CURRENT_TIMESTAMP,
         NULL, false, 3, 'MEMBER'),
        ('jane_smith', 'password456', 'JaneSmith', 'jane@example.com', '010-2345-6789', 5, 202, true, CURRENT_TIMESTAMP,
         NULL, false, 2, 'MEMBER'),
@@ -175,7 +175,7 @@ VALUES ('배달'),
 -- Matching 더미데이터
 INSERT INTO matching (matching_accomplished_yn, matching_head_count_limit, matching_category_id,
                       matching_created_at, matching_updated_at, user_id)
-VALUES (false, 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'john_doe'),
+VALUES (false, 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'john_doeee'),
        (false, 5, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'jane_smith'),
        (false, 3, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'mike_jones');
 
@@ -183,7 +183,7 @@ VALUES (false, 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'john_doe'),
 -- MatchingStatus 더미데이터
 INSERT INTO matching_status (matching_id, user_id)
 
-VALUES (1, 'john_doe'),
+VALUES (1, 'john_doeee'),
        (1, 'jane_smith'),
        (1, 'mike_jones'),
        (2, 'sara_brown'),

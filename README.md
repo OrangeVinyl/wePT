@@ -58,13 +58,6 @@
 <td align="center">팀원</td>
 <td align="center">팀장</td>
     </tr>
-    <tr>
-<td align="center">role</td>
-<td align="center">role</td>
-<td align="center">role</td>
-<td align="center">role</td>
-<td align="center">role</td>
-    </tr>
   </tbody>
 </table>
 <br/><br/>
